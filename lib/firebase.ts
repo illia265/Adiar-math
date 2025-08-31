@@ -5,13 +5,13 @@ import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, limit
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyB-liEj_WpadtxzmNwf9xq_s6QE1RbhO1I",
-  authDomain: "adiar-math.firebaseapp.com",
-  projectId: "adiar-math",
-  storageBucket: "adiar-math.firebasestorage.app",
-  messagingSenderId: "1014741772480",
-  appId: "1:1014741772480:web:1756bfa5eb35267c706525",
-  measurementId: "G-5HQGPVG00K"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 }
 
 // Initialize Firebase
@@ -23,9 +23,9 @@ try {
   console.error('Error initializing Firebase:', error)
   // Create a fallback app with minimal config
   app = initializeApp({
-    apiKey: "AIzaSyB-liEj_WpadtxzmNwf9xq_s6QE1RbhO1I",
-    authDomain: "adiar-math.firebaseapp.com",
-    projectId: "adiar-math"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
   })
 }
 
