@@ -17,7 +17,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem('theme') as Theme
-    if (savedTheme) {
+    
+    if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
       setTheme(savedTheme)
     } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       setTheme('dark')
@@ -26,17 +27,24 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Update document class and save to localStorage
-    document.documentElement.classList.remove('light', 'dark')
-    document.documentElement.classList.add(theme)
+    const root = document.documentElement
+    root.classList.remove('light', 'dark')
+    root.classList.add(theme)
     localStorage.setItem('theme', theme)
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light')
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+  }
+
+  const contextValue: ThemeContextType = {
+    theme,
+    toggleTheme
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   )
